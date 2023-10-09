@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -19,10 +20,15 @@ class MainActivity : AppCompatActivity() {
         val et: EditText = findViewById(R.id.et_name)
 
         b1.setOnClickListener() {
-            var username = et.text
-            var i = Intent(this, LuckyNumberActivity::class.java)
-            i.putExtra("name", username)
-            startActivity(i)
+            if(et.text.isEmpty()){
+                Toast.makeText(this, "Fill in all the fields",Toast.LENGTH_LONG).show()
+            }else{
+                val username = et.text
+                val i = Intent(this, LuckyNumberActivity::class.java)
+                i.putExtra("name", username)
+                startActivity(i)
+            }
+
         }
     }
 }

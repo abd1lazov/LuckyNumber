@@ -16,35 +16,35 @@ class LuckyNumberActivity : AppCompatActivity() {
         val lucky_text: TextView = findViewById(R.id.tv_number)
         val btn: Button = findViewById(R.id.btn_share)
 
-        var user_name = receiveUserName()
+        val user_name = receiveUserName()
 
-        var random_num = generateRandomNumber()
+        val random_num = generateRandomNumber()
 //        Toast.makeText(this, "" + random_num, Toast.LENGTH_LONG).show()
         lucky_text.setText("" + random_num)
 
-        btn.setOnClickListener(){
+        btn.setOnClickListener() {
             sharingData(user_name, random_num)
         }
     }
 
-    fun receiveUserName(): String {
-        var bundle: Bundle? = intent.extras
-        var username = bundle?.get("name").toString()
+    private fun receiveUserName(): String {
+        val bundle: Bundle? = intent.extras
+        val username = bundle?.get("name").toString()
         return username
     }
 
     //    Random number generate
-    fun generateRandomNumber(): Int {
+    private fun generateRandomNumber(): Int {
         val random = Random.nextInt(1000)
         return random
     }
 
     //    sharing username & lucky number
-    fun sharingData(name: String, number: Int) {
-        var i = Intent(Intent.ACTION_SEND)
-        i.setType("text/plain")
-        i.putExtra(Intent.EXTRA_SUBJECT,"$name Is lucky today")
-        i.putExtra(Intent.EXTRA_TEXT,"His lucky number is $number")
+    private fun sharingData(name: String, number: Int) {
+        val i = Intent(Intent.ACTION_SEND)
+        i.type = "text/plain"
+        i.putExtra(Intent.EXTRA_SUBJECT, "$name Is lucky today")
+        i.putExtra(Intent.EXTRA_TEXT, "His lucky number is $number")
         startActivity(i)
 
     }
